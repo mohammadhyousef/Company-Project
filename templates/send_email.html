@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Send Email{% endblock %}
+
+{% block content %}
+<h1>{{ _('Send Email') }}</h1>
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <label for="subject">{{ _('Subject') }}</label>
+        <input type="text" id="subject" name="subject" required>
+    </div>
+    <div>
+        <label for="message">{{ _('Message') }}</label>
+        <textarea id="message" name="message" required></textarea>
+    </div>
+    <button type="submit">{{ _('Send') }}</button>
+</form>
+{% endblock %}
