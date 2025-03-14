@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% blocktrans %}Projects{% endblocktrans %}{% endblock %}
+
+{% block content %}
+<h1>{% blocktrans %}Completed Projects{% endblocktrans %}</h1>
+<ul>
+    {% for project in projects %}
+    <li>
+        <h2>{{ project.title }}</h2>
+        <p>{{ project.description }}</p>
+        {% if project.image %}
+        <img src="{{ project.image.url }}" alt="{{ project.title }}">
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

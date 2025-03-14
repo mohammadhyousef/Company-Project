@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Subscribe" %}{% endblock %}
+
+{% block content %}
+<h1>{% trans "Subscribe to our Newsletter" %}</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="email">{% trans "Email" %}</label>
+    <input type="email" name="email" required>
+    <button type="submit">{% trans "Subscribe" %}</button>
+</form>
+{% endblock %}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Company Projects{% endblock %}</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% load i18n %}
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'project_list' %}">{% trans "Home" %}</a></li>
+                <li><a href="{% url 'blog_list' %}">{% trans "Blog" %}</a></li>
+                <li><a href="{% url 'subscribe' %}">{% trans "Subscribe" %}</a></li>
+                <li><a href="{% url 'send_email' %}">{% trans "Send Email" %}</a></li>
+                <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
+                <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
+                <li>
+                    <a href="/en/">{% trans "English" %}</a> | 
+                    <a href="/ar/">{% trans "Arabic" %}</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    {% block content %}{% endblock %}
+    <footer>
+        <form method="post" action="{% url 'subscribe' %}">
+            {% csrf_token %}
+            <input type="email" name="email" placeholder="{% trans 'Enter your email' %}" required>
+            <button type="submit">{% trans 'Subscribe' %}</button>
+        </form>
+    </footer>
+</body>
+</html>
