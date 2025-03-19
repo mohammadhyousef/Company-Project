@@ -12,29 +12,21 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 from django.utils.translation import gettext_lazy as _
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-jtc_7hwr9=rd-%+6ltfw0dka%w((g@juiat5k%$lnfe5*_a2hq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = [
-   'company-project-2abc81a32fcb.herokuapp.com', '127.0.0.1'
-]
-
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'company-project-2abc81a32fcb.herokuapp.com,127.0.0.1').split(',')
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,11 +43,12 @@ INSTALLED_APPS = [
     'django_rq',
 ]
 
+AUTH_USER_MODEL = 'accounts.CustomUser'  # تأكد من أن لديك نموذج مستخدم مخصص
+
 LANGUAGES = [
     ('en', _('English')),
     ('ar', _('Arabic')),
 ]
-
 
 LOCALE_PATHS = [
     BASE_DIR / 'locale',
@@ -94,30 +87,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'company_project.wsgi.application'
 
-
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'd6p3l6lmblj681',
-        'HOST': 'ccaml3dimis7eh.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com',
-        'USER': 'admin',
-        'PASSWORD': 'pbdf3b6a0b90ed3091acebf6c7feac7781089ba228fef60a1cbafefd9fb838501',
-        'PORT': '5432', 
-    }
+    'default': dj_database_url.config(default='sqlite:///db.sqlite3', conn_max_age=600)
 }
 
 RQ_QUEUES = {
     'default': {
-        'HOST': 'localhost',
-        'PORT': 6379,
-        'DB': 0,
+        'URL': os.getenv('REDIS_URL', 'redis://localhost:6379/0'),
         'DEFAULT_TIMEOUT': 360,
     },
 }
-
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -134,31 +113,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
-LANGUAGE_CODE = 'en-us' # تعيين اللغة الافتراضية
-
+LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
 STATIC_URL = 'static/'
-
-STATICFILES_DIRS = [os.path.join(BASE_DIR / 'static',)]
-STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles')
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/accounts/profile/'  # تحديد المسار الذي يتم توجيه المستخدم إليه بعد تسجيل الدخول
-LOGOUT_REDIRECT_URL = '/login/'  # تحديد المسار الذي يتم توجيه المستخدم إليه بعد تسجيل الخروج
+LOGIN_REDIRECT_URL = '/accounts/profile/'
+LOGOUT_REDIRECT_URL = '/login/'
