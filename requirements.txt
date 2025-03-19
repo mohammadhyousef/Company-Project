@@ -29,3 +29,4 @@ django-celery-results
 modeltranslation
 Django==5.1.7
 django-modeltranslation==0.19.12
+dj-database-url
