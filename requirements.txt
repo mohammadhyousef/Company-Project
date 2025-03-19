@@ -26,7 +26,6 @@ wcwidth==0.2.13
 whitenoise==6.9.0
 django_rq==2.5.1
 django-celery-results
-modeltranslation
 Django==5.1.7
-django-modeltranslation==0.19.12
+django-modeltranslation
 dj-database-url
