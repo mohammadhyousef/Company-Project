@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Subscribe{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Subscribe to our Newsletter</h1>
+<form method="post" class="form-group">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary mt-3">Subscribe</button>
+</form>
+{% endblock %}

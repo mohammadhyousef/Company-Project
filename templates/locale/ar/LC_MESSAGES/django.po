@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-17 07:41+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+#: .\templates\add_project.html:6
+msgid "Add Project"
+msgstr "اضافع مشروع"
+
+#: .\templates\add_project.html:10
+msgid "Add"
+msgstr "اضافة"
+
+#: .\templates\base.html:13
+msgid "Home"
+msgstr "    الرئيسية"
+
+#: .\templates\base.html:14 .\templates\blog\blog_index.html:6
+#: .\templates\blog\blog_list.html:4
+msgid "Blog"
+msgstr "    المدونة"
+
+#: .\templates\base.html:15 .\templates\base.html:31
+#: .\templates\newsletter\subscribe.html:4
+#: .\templates\newsletter\subscribe.html:12
+msgid "Subscribe"
+msgstr "    اشتراك"
+
+#: .\templates\base.html:16 .\templates\newsletter\send_email.html:4
+#: .\templates\send_email.html:6
+msgid "Send Email"
+msgstr "        ارسال بريد"
+
+#: .\templates\base.html:17
+msgid "Login"
+msgstr "        تسجيل الدخول"
+
+#: .\templates\base.html:18
+msgid "Logout"
+msgstr "        تسجيل الخروج"               
+
+#: .\templates\base.html:20
+msgid "English"
+msgstr "        انجليزي"    
+
+#: .\templates\base.html:21
+msgid "Arabic"
+msgstr "عربي"
+
+#: .\templates\base.html:30
+msgid "Enter your email"
+msgstr "    ادخل بريدك الالكتروني"
+
+#: .\templates\blog\blog_list.html:7
+msgid "Blog Posts"
+msgstr "        مدونة"  
+
+#: .\templates\index.html:6
+msgid "Projects"
+msgstr "        مشاريع"
+
+#: .\templates\newsletter\send_email.html:7
+msgid "Send an Email to Subscribers"
+msgstr "                ارسال بريد الكتروني للمشتركين"
+
+#: .\templates\newsletter\send_email.html:10 .\templates\send_email.html:10
+msgid "Subject"
+msgstr "    الموضوع"
+
+#: .\templates\newsletter\send_email.html:13 .\templates\send_email.html:14
+msgid "Message"
+msgstr "    الرسالة"
+
+#: .\templates\newsletter\send_email.html:16 .\templates\send_email.html:17
+msgid "Send"
+msgstr "    ارسال"
+
+#: .\templates\newsletter\subscribe.html:7
+msgid "Subscribe to our Newsletter"
+msgstr "    اشتراك في النشرة الاخبارية"
+
+#: .\templates\newsletter\subscribe.html:10
+msgid "Email"
+msgstr "    البريد الالكتروني"  

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Company Projects{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Completed Projects</h1>
+    <ul class="list-group">
+        {% for project in projects %}
+            <li class="list-group-item">
+                <h5>{{ project.title }}</h5>
+                <p>{{ project.description }}</p>
+                <small class="text-muted">{{ project.completed_date }}</small>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

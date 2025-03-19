@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}{% blocktrans %}Add Project{% endblocktrans %}{% endblock %}
+
+{% block content %}
+<h1>{% blocktrans %}Add a New Project{% endblocktrans %}</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="title">{% blocktrans %}Title{% endblocktrans %}</label>
+    <input type="text" name="title" required>
+    
+    <label for="description">{% blocktrans %}Description{% endblocktrans %}</label>
+    <textarea name="description" required></textarea>
+    
+    <label for="image">{% blocktrans %}Image{% endblocktrans %}</label>
+    <input type="file" name="image">
+    
+    <button type="submit">{% blocktrans %}Add Project{% endblocktrans %}</button>
+</form>
+{% endblock %}

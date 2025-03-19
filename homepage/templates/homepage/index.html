@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Company Projects</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- Language Switcher -->
+            <ul>
+                <li><a href="?lang=ar">Arabic</a></li>
+                <li><a href="?lang=en">English</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Our Projects</h1>
+        <ul>
+            {% for project in projects %}
+                <li>{{ project.name }} - {{ project.description }}</li>
+            {% endfor %}
+        </ul>
+    </main>
+    <footer>
+        <form action="{% url 'subscribe' %}" method="post">
+            {% csrf_token %}
+            <input type="email" name="email" placeholder="Enter your email">
+            <button type="submit">Subscribe</button>
+        </form>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Company Projects</title>
+</head>
+<body>
+    <h1>Company Projects</h1>
+    <ul>
+        {% for project in projects %}
+        <li>
+            <h2>{{ project.title }}</h2>
+            <p>{{ project.description }}</p>
+            <img src="{{ project.image.url }}" alt="{{ project.title }}">
+        </li>
+        {% endfor %}
+    </ul>
+    <footer>
+        <form action="{% url 'subscribe_newsletter' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Subscribe</button>
+        </form>
+    </footer>
+</body>
+</html>

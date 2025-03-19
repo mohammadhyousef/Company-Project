@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="mb-4">Completed Projects</h1>
+<a href="{% url 'add_project' %}" class="btn btn-primary mb-4">Add Project</a>
+<div class="row">
+    {% for project in projects %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.title }}</h5>
+                    <p class="card-text">{{ project.description }}</p>
+                    <form method="post" action="{% url 'delete_project' project.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <footer class="bg-light text-center py-3 mt-5">
+        <form method="post" action="{% url 'subscribe' %}" class="d-flex justify-content-center">
+            {% csrf_token %}
+            <input type="email" class="form-control me-2" name="email" placeholder="Enter your email">
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+    </footer>
+</div>
+{% endblock %}
