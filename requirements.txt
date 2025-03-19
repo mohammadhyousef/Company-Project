@@ -29,3 +29,4 @@ django-celery-results
 Django==5.1.7
 django-modeltranslation
 dj-database-url
+psycopg2-binary
