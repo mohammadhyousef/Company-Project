@@ -1,0 +1,59 @@
+name: Windows 11 RDP (Ngrok)
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  rdp-access:
+    # 'windows-latest' currently points to Server 2022. 
+    # Use 'windows-2025' if available for your account, otherwise standard Latest works best.
+    runs-on: windows-latest
+
+    steps:
+    - name: 1. Enable RDP & Firewall
+      run: |
+        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -Value 0
+        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+        Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+
+    - name: 2. Set User Password
+      run: |
+        # Sets password for the default admin user 'runneradmin'
+        $pass = ConvertTo-SecureString "P@ssw0rd!" -AsPlainText -Force
+        Set-LocalUser -Name "runneradmin" -Password $pass
+
+    - name: 3. Install & Start Ngrok
+      env:
+        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+      run: |
+        # Clean install using Chocolatey
+        choco install ngrok --no-progress
+        
+        # Authenticate
+        ngrok config add-authtoken $env:NGROK_AUTH_TOKEN
+        
+        # Start ngrok in the background (Non-blocking)
+        Start-Process ngrok -ArgumentList "tcp 3389"
+        
+        # Give it 10 seconds to establish the tunnel
+        Start-Sleep -Seconds 10
+
+    - name: 4. Get Connection Info
+      run: |
+        # Query local Ngrok API to get the public URL
+        try {
+          $tunnels = Invoke-RestMethod http://localhost:4040/api/tunnels
+          $url = $tunnels.tunnels[0].public_url
+          $cleanUrl = $url.Replace("tcp://", "")
+          
+          echo "::notice title=RDP Address::$cleanUrl"
+          echo "::notice title=Username::runneradmin"
+          echo "::notice title=Password::P@ssw0rd!"
+        } catch {
+          Write-Error "Ngrok failed to start. Check your Auth Token."
+        }
+
+    - name: 5. Keep Session Alive
+      run: |
+        Write-Host "Session is active. Press Cancel Workflow to stop."
+        while($true) { Start-Sleep -Seconds 60 }
